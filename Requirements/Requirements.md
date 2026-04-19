@@ -14,9 +14,9 @@
 3.2 [Нефункциональные требования](#3.2) <br>
 3.2.1 [Атрибуты качества](#3.2.1) <br>
 3.2.2 [Ограничения](#3.2.2) <br>
-4. [Описание игры](#4) <br>
-4.1 [Цель игры](#4.1) <br>
-4.2 [Правила игры](#4.2) <br>
+4. [Описание приложения](#4) <br>
+4.1 [Цель приложения](#4.1) <br>
+4.2 [Руководство пользователя](#4.2) <br>
 5. [Аналоги](#5) <br>
 
 ### 1\. Введение <a name="1"></a>
@@ -41,37 +41,37 @@ bwip-js — для генерации сложных форматов (EAN-13, E
 
 На данном макете демонстрируется возможность выбора типа штрихкода.
 
-!\[GameScreen](https://github.com/kirill250541/Barcode_generator/blob/main/Mockups/barcode_type.png)
+!\[barcode_type]Mockups/barcode_type.png)
 
 * Пример генерации QR-кода
 
 На данном макете демонстрируется пример генерации QR-кода. Также демонстрируются возможности выбора формата получаемого изображения и скачивания полученного изображения со штрихкодом.
 
-!\[MenuScreen](https://github.com/kirill250541/Barcode_generator/blob/main/Mockups/QR_code.png)
+!\[QR_code](Mockups/QR_code.png)
 
 * Пример выбора типа кодируемой информации в QR-код
 
 На данном макете демонстрируется возможность выбора типа кодируемой информации в QR-код (такие же типы доступны для data matrix) 
 
-!\[HighScoreScreen](https://github.com/kirill250541/Barcode_generator/blob/main/Mockups/QR_code_type.png)
+!\[QR_code_type](Mockups/QR_code_type.png)
 
 * Пример генерации data matrix
 
 На данном макете демонстрируется пример генерации data matrix.
 
-!\[AboutScreen](https://github.com/kirill250541/Barcode_generator/blob/main/Mockups/Data_matrix.png)
+!\[Data_matrix](Mockups/Data_matrix.png)
 
 * Пример выбора типа EAN
 
 На данном макете демонстрируется возможность выбора типа EAN 
 
-!\[AboutScreen](https://github.com/kirill250541/Barcode_generator/blob/main/Mockups/EAN_type.png)
+!\[EAN_type](Mockups/EAN_type.png)
 
 * Пример генерации EAN
 
 На данном макете демонстрируется пример генерации EAN-13.
 
-!\[AboutScreen](https://github.com/kirill250541/Barcode_generator/blob/main/Mockups/EAN.png)
+!\[Mockups](Mockups/EAN.png)
 
 #### 2.3. Характеристики пользователей <a name="2.3"></a>
 
