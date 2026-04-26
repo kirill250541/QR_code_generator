@@ -1,67 +1,19 @@
-# barcode_generator
+# Barcode generator
 
 Веб-приложение для генерации кодов: `QR`, `Data Matrix`, `EAN-8`, `EAN-13`.
 
-## Что делает приложение
+# Содержание
 
-- Принимает данные из формы в браузере.
-- Валидирует ввод на клиенте (например, длину EAN и формат email/телефона).
-- Отправляет запрос на сервер `POST /api/qr`.
-- Сервер генерирует изображение кода в формате `PNG` или `SVG`.
-- На странице показывается превью и активируется кнопка скачивания.
-
-## Поддерживаемые типы данных
-
-- **Для QR / Data Matrix:**
-  - обычный текст или URL
-  - телефон (`tel:`)
-  - email (`mailto:`)
-  - Wi-Fi (`WIFI:T:...;S:...;P:...;;`)
-  - vCard (`VCARD 3.0`)
-- **Для EAN:**
-  - `EAN-13` (12 цифр + авторасчет контрольной или 13 с проверкой)
-  - `EAN-8` (7 цифр + авторасчет контрольной или 8 с проверкой)
-
-## Как работает логика (кратко)
-
-1. Пользователь выбирает тип кода и заполняет нужные поля.
-2. Клиент (`src/public/app.js`) собирает payload под выбранный формат.
-3. Клиент отправляет payload на сервер (`src/server.js`).
-4. Сервер выбирает генератор:
-   - `qrcode` для QR
-   - `bwip-js` для Data Matrix и EAN
-5. Сервер возвращает `image/png` или `image/svg+xml`.
-6. Клиент показывает результат и формирует ссылку на скачивание.
-
-## Структура проекта
-
-- `src/server.js` — API и генерация изображений кодов.
-- `src/public/index.html` — интерфейс формы и блока результата.
-- `src/public/app.js` — клиентская логика (валидация, запрос, превью, скачивание).
-- `src/public/styles.css` — оформление интерфейса.
-- `src/package.json` — зависимости и команды запуска.
-
-## Запуск
-
-```bash
-cd src
-npm install
-npm run dev
-```
-
-После запуска приложение доступно по адресу: [http://localhost:3000](http://localhost:3000)
-
-## Разбор `src/package.json`
-
-Ниже объяснение ключей, так как JSON не поддерживает обычные комментарии `//` и `/* */`.
-
-- `name` — имя пакета проекта.
-- `version` — текущая версия проекта.
-- `private: true` — запрещает случайную публикацию в npm.
-- `type: "module"` — включает ESM-синтаксис (`import/export`) в Node.js.
-- `scripts.start` — запуск сервера в обычном режиме (`node server.js`).
-- `scripts.dev` — запуск сервера в режиме наблюдения (`node --watch server.js`).
-- `dependencies.express` — HTTP-сервер и маршруты API.
-- `dependencies.cors` — CORS-заголовки для кросс-доменных запросов.
-- `dependencies.qrcode` — генерация QR-кодов.
-- `dependencies.bwip-js` — генерация Data Matrix и EAN штрихкодов.
+1 [Документы] (./Documents/)
+  1.1 [Требования](./Documents/Requirements.md)
+  1.2 [Диаграмма вариантов использования](./Documents/System-project/Use-Case/README.md)  
+  1.3 [Диаграммы активностей](./Documents/System-project/Activity/Readme.md)
+  1.4 [Диаграммы последовательностей](./Documents/System project/Sequence/README.md)  
+  1.5 [Диаграммы состояний](./Documents/System-project/State/Readme.md)
+  1.6 [Диаграмма классов](./Documents/System project/Class/README.md)  
+  1.7 [Диаграмма развёртывания](./Documents/System project/Component/README.md)
+2 [Тестирование](./Testing/)
+  2.1 [План тестирования](./Testing/TestPlan.md)
+  2.2 [Результаты тестирования](./Testing/TestResults.md)
+3 [Изображения](./images/)
+4 [Исходный код](./src/)

@@ -9,14 +9,14 @@
 <a name="add"/>
 
 # 1 Сгенерировать штрихкод
-![Сгенерировать штрихкод](barcode_generation.png)
+![Сгенерировать штрихкод](/../../barcode_generation.png)
 
 <a name="edit"/>
 
 # 2 Сгенерировать EAN
-![Сгенерировать EAN](ean_generation.png)
+![Сгенерировать EAN](/../../ean_generation.png)
 
 <a name="del"/>
 
 # 3 Ошибки генерации
-![Ошибки генерации](error_generation.png)
+![Ошибки генерации](/../../error_generation.png)

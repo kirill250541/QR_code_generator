@@ -11,21 +11,21 @@
 ## 1.1 Генерация QR-кода
 
 Если пользователь выбрал генерацию QR-кода, то он может выбрать тип данных, который будет закодирован.  
-![gen_qr](generate_qr_code.png)
+![gen_qr](/../../generate_qr_code.png)
 
 ## 1.2 Генерация EAN
 
 Если пользователь выбрал генерацию EAN, то он может выбрать тип EAN: EAN-8 и EAN-13.  
-![gen_ean](generate_ean.png)
+![gen_ean](/../../generate_ean.png)
 
 ## 1.3 Генерация Data Matrix
 
 Если пользователь выбрал генерацию Data Matrix, то он может выбрать тип данных, который будет закодирован.  
-![gen_d_matr](generate_data_matrix.png)
+![gen_d_matr](/../../generate_data_matrix.png)
 
 ## 1.4 Скачивание штрихкода
 
 После генерации штрихкода пользователь может скачать штрихкод
 
-![downl_barc](download_barcode.png)
+![downl_barc](/../../download_barcode.png)
 
