@@ -2,21 +2,21 @@
 
 
 # Содержание
-1 [Добавить задачу](#add)  
-2 [Отредактировать задачу](#edit)  
-3 [Удалить задачу](#del)
+1 [Сгенерировать штрихкод](#add)  
+2 [Сгенерировать EAN](#edit)  
+3 [Ошибки генерации](#del)
 
 <a name="add"/>
 
-# 1 Добавить задачу
-![Добавить задачу](../../../Images/System%20Design/Sequence%20Diagram%201.JPG)
+# 1 Сгенерировать штрихкод
+![Сгенерировать штрихкод](barcode_generation.png)
 
 <a name="edit"/>
 
-# 2 Отредактировать задачу
-![Отредактировать задачу](../../../Images/System%20Design/Sequence%20Diagram%202.JPG)
+# 2 Сгенерировать EAN
+![Сгенерировать EAN](ean_generation.png)
 
 <a name="del"/>
 
-# 3 Удалить задачу
-![Удалить задачу](../../../Images/System%20Design/Sequence%20Diagram%203.JPG)
+# 3 Ошибки генерации
+![Ошибки генерации](error_generation.png)
