@@ -1,0 +1,289 @@
+:root {
+  /* Включаем тёмную цветовую схему браузерных контролов (скроллбаров, form-элементов). */
+  color-scheme: dark;
+  /* Базовый фон страницы. */
+  --bg: #0f1218;
+  /* Фон карточек и блоков. */
+  --card: #171b24;
+  /* Цвет границ. */
+  --border: #2a3140;
+  /* Основной цвет текста. */
+  --text: #e8ecf4;
+  /* Приглушённый текст для подсказок/второстепенной информации. */
+  --muted: #9aa3b5;
+  /* Акцентный цвет кнопок и ссылок. */
+  --accent: #5b8def;
+  /* Акцентный цвет при hover-состоянии. */
+  --accent-hover: #7aa3f5;
+  /* Цвет ошибок. */
+  --danger: #f07178;
+  /* Стандартный радиус скругления. */
+  --radius: 12px;
+  /* Системный стек шрифтов. */
+  --font: system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  /* Предсказуемая модель размеров: padding/border входят в width/height. */
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* Минимум на высоту окна, чтобы фон и layout тянулись на весь экран. */
+  min-height: 100vh;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.wrap {
+  /* Ограничиваем ширину контента для удобного чтения. */
+  max-width: 960px;
+  /* Центрируем контейнер по горизонтали. */
+  margin: 0 auto;
+  /* Внутренние отступы страницы. */
+  padding: 2rem 1.25rem 3rem;
+}
+
+.page-head {
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 650;
+  margin: 0 0 0.5rem;
+}
+
+.lead {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.95rem;
+  max-width: 42rem;
+}
+
+.layout {
+  /* Основная сетка из двух колонок: форма и результат. */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem 2rem;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .layout {
+    /* На узких экранах перестраиваемся в одну колонку. */
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel--input {
+  min-width: 0;
+}
+
+.panel--output {
+  min-width: 0;
+}
+
+.output-title {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem;
+}
+
+.output-hint {
+  margin: 0;
+  padding: 1.25rem;
+  /* Минимальная высота совпадает с блоком превью для стабильного layout. */
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.output-hint[hidden] {
+  display: none;
+}
+
+.card {
+  /* Визуально отделенная карточка с формой ввода. */
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+label {
+  /* Компактные и читаемые подписи полей. */
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.field-group {
+  /* Каждая группа полей — вертикальный flex-блок. */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-group[hidden] {
+  display: none;
+}
+
+.field-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.control {
+  /* Базовый стиль для input/select с единым внешним видом. */
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.control--select {
+  /* Явный указатель "кликабельно" для select. */
+  cursor: pointer;
+}
+
+.control--textarea-sm {
+  /* Уменьшенный textarea для коротких многострочных полей (например, email body/note). */
+  resize: vertical;
+  min-height: 72px;
+}
+
+textarea {
+  /* Общие стили textarea (основной многострочный блок). */
+  width: 100%;
+  resize: vertical;
+  min-height: 120px;
+  padding: 0.75rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+textarea:focus,
+.control:focus {
+  /* Видимый контур фокуса для доступности (keyboard navigation). */
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.control:disabled {
+  /* Визуально показываем недоступные поля (например, пароль Wi-Fi для open-сети). */
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.row {
+  /* Горизонтальный ряд для радио-кнопок формата PNG/SVG. */
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.inline {
+  /* Компактная строка: radio/checkbox + подпись. */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.inline--block {
+  margin-top: 0.25rem;
+}
+
+button {
+  /* Главная кнопка отправки формы. */
+  margin-top: 0.25rem;
+  padding: 0.65rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  /* Hover-эффект кнопки для лучшей обратной связи. */
+  background: var(--accent-hover);
+}
+
+button:disabled {
+  /* Состояние кнопки во время запроса/генерации. */
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  /* Сообщения об ошибке под формой. */
+  color: var(--danger);
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+}
+
+.result {
+  margin: 0;
+}
+
+.result[hidden] {
+  display: none;
+}
+
+.preview {
+  /* Область предпросмотра сгенерированного кода. */
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Стабилизируем высоту, чтобы интерфейс не "прыгал". */
+  min-height: 200px;
+}
+
+.preview img,
+.preview svg {
+  /* Картинка/вектор не выходят за пределы контейнера. */
+  max-width: 100%;
+  height: auto;
+}
+
+.download {
+  /* Ссылка для скачивания результата. */
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.download:hover {
+  /* Подчеркивание при наведении как явный интерактивный сигнал. */
+  text-decoration: underline;
+}

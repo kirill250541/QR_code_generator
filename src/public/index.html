@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <!-- Базовые метаданные страницы и подключение стилей -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Генератор штрихкодов</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <!-- Основной контейнер страницы -->
+    <main class="wrap">
+      <header class="page-head">
+        <h1>Генератор штрихкодов</h1>
+      </header>
+
+      <!-- Двухколоночный layout: слева форма, справа результат -->
+      <div class="layout">
+        <div class="panel panel--input">
+          <!-- Форма ввода параметров генерации -->
+          <form id="form" class="card">
+            <!-- Выбор семейства кодов -->
+            <label for="codeFormat">Тип кода</label>
+            <select id="codeFormat" name="codeFormat" class="control control--select">
+              <option value="qr">QR-код</option>
+              <option value="datamatrix">Data Matrix</option>
+              <option value="ean">EAN</option>
+            </select>
+
+            <!-- Блок EAN-полей (показывается только при codeFormat = ean) -->
+            <div class="field-group" id="group-ean" hidden>
+              <label for="eanVariant">Вариант EAN</label>
+              <select id="eanVariant" name="eanVariant" class="control control--select">
+                <option value="13">EAN-13</option>
+                <option value="8">EAN-8</option>
+              </select>
+              <label for="eanDigits">Цифры кода</label>
+              <input
+                id="eanDigits"
+                name="eanDigits"
+                type="text"
+                class="control"
+                inputmode="numeric"
+                pattern="[0-9]*"
+                maxlength="32"
+                autocomplete="off"
+                placeholder="Например: 12 цифр для EAN-13 или 7 для EAN-8"
+              />
+              <p class="field-hint">
+                Можно ввести 12 цифр для EAN-13 (или 7 для EAN-8) — контрольная цифра будет
+                добавлена автоматически; либо полный код с уже верной контрольной цифрой.
+              </p>
+            </div>
+
+            <!-- Блок структурированных данных для QR/Data Matrix -->
+            <div id="blockStructured">
+            <!-- Выбор типа данных, которые нужно закодировать -->
+            <label for="dataType">Тип информации</label>
+            <select id="dataType" name="dataType" class="control control--select">
+              <option value="url">Ссылка или текст</option>
+              <option value="phone">Номер телефона</option>
+              <option value="email">Электронная почта</option>
+              <option value="wifi">Сеть Wi‑Fi</option>
+              <option value="vcard">Цифровая визитка (vCard)</option>
+            </select>
+
+            <!-- Группа URL/текст -->
+            <div class="field-group" id="group-url">
+              <label for="urlText">Текст или URL</label>
+              <textarea
+                id="urlText"
+                name="urlText"
+                rows="5"
+                maxlength="2000"
+                placeholder="Например: https://example.com или произвольный текст"
+              ></textarea>
+            </div>
+
+            <!-- Группа телефона -->
+            <div class="field-group" id="group-phone" hidden>
+              <label for="phoneNumber">Номер телефона</label>
+              <input
+                id="phoneNumber"
+                name="phoneNumber"
+                type="tel"
+                class="control"
+                maxlength="32"
+                placeholder="+7 900 123-45-67"
+                autocomplete="tel"
+              />
+              <p class="field-hint">В международном формате, со знаком + — так надёжнее для сканеров.</p>
+            </div>
+
+            <!-- Группа email -->
+            <div class="field-group" id="group-email" hidden>
+              <label for="emailTo">Адрес получателя</label>
+              <input
+                id="emailTo"
+                name="emailTo"
+                type="email"
+                class="control"
+                maxlength="254"
+                placeholder="name@example.com"
+                autocomplete="email"
+              />
+              <label for="emailSubject">Тема (необязательно)</label>
+              <input
+                id="emailSubject"
+                name="emailSubject"
+                type="text"
+                class="control"
+                maxlength="200"
+              />
+              <label for="emailBody">Текст письма (необязательно)</label>
+              <textarea
+                id="emailBody"
+                name="emailBody"
+                rows="3"
+                maxlength="1000"
+                class="control control--textarea-sm"
+              ></textarea>
+            </div>
+
+            <!-- Группа Wi-Fi (SSID, тип защиты, пароль, флаг скрытой сети) -->
+            <div class="field-group" id="group-wifi" hidden>
+              <label for="wifiSsid">Имя сети (SSID)</label>
+              <input
+                id="wifiSsid"
+                name="wifiSsid"
+                type="text"
+                class="control"
+                maxlength="128"
+                autocomplete="off"
+              />
+              <label for="wifiSecurity">Тип защиты</label>
+              <select id="wifiSecurity" name="wifiSecurity" class="control control--select">
+                <option value="WPA">WPA / WPA2 (рекомендуется)</option>
+                <option value="WPA3">WPA3</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">Без пароля</option>
+              </select>
+              <label for="wifiPassword">Пароль</label>
+              <input
+                id="wifiPassword"
+                name="wifiPassword"
+                type="text"
+                class="control"
+                maxlength="128"
+                autocomplete="off"
+              />
+              <label class="inline inline--block">
+                <input type="checkbox" id="wifiHidden" name="wifiHidden" />
+                Скрытая сеть
+              </label>
+            </div>
+
+            <!-- Группа цифровой визитки (vCard) -->
+            <div class="field-group" id="group-vcard" hidden>
+              <label for="vcardFn">Имя и фамилия</label>
+              <input
+                id="vcardFn"
+                name="vcardFn"
+                type="text"
+                class="control"
+                maxlength="120"
+                placeholder="Иван Иванов"
+              />
+              <label for="vcardOrg">Компания (необязательно)</label>
+              <input
+                id="vcardOrg"
+                name="vcardOrg"
+                type="text"
+                class="control"
+                maxlength="120"
+              />
+              <label for="vcardTitle">Должность (необязательно)</label>
+              <input
+                id="vcardTitle"
+                name="vcardTitle"
+                type="text"
+                class="control"
+                maxlength="80"
+              />
+              <label for="vcardTel">Телефон (необязательно)</label>
+              <input
+                id="vcardTel"
+                name="vcardTel"
+                type="tel"
+                class="control"
+                maxlength="32"
+              />
+              <label for="vcardEmail">Email (необязательно)</label>
+              <input
+                id="vcardEmail"
+                name="vcardEmail"
+                type="email"
+                class="control"
+                maxlength="120"
+              />
+              <label for="vcardUrl">Сайт (необязательно)</label>
+              <input
+                id="vcardUrl"
+                name="vcardUrl"
+                type="url"
+                class="control"
+                maxlength="200"
+                placeholder="https://"
+              />
+              <label for="vcardNote">Заметка (необязательно)</label>
+              <textarea
+                id="vcardNote"
+                name="vcardNote"
+                rows="2"
+                maxlength="500"
+                class="control control--textarea-sm"
+              ></textarea>
+            </div>
+            </div>
+
+            <!-- Переключатель формата выходного файла -->
+            <div class="row">
+              <label class="inline">
+                <input type="radio" name="format" value="png" checked />
+                PNG
+              </label>
+              <label class="inline">
+                <input type="radio" name="format" value="svg" />
+                SVG
+              </label>
+            </div>
+
+            <!-- Кнопка запуска генерации -->
+            <button type="submit" id="submit">Сгенерировать</button>
+          </form>
+
+          <!-- Контейнер ошибок валидации/серверных ошибок -->
+          <p id="error" class="error" hidden></p>
+        </div>
+
+        <!-- Панель результата -->
+        <div class="panel panel--output">
+          <h2 class="output-title">Результат</h2>
+          <!-- Подсказка до генерации и в состояниях без результата -->
+          <p id="outputHint" class="output-hint">
+            Изображение кода появится здесь после нажатия «Сгенерировать».
+          </p>
+          <!-- Блок превью и ссылки скачивания (показывается после успешной генерации) -->
+          <section id="result" class="result" hidden>
+            <div id="preview" class="preview"></div>
+            <a id="download" class="download" download>Скачать</a>
+          </section>
+        </div>
+      </div>
+    </main>
+    <!-- Клиентская логика: обработка формы, валидация, запрос к API, рендер превью -->
+    <script src="/app.js"></script>
+  </body>
+</html>
